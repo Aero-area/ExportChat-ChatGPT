@@ -1,0 +1,147 @@
+#exportchat-claude-root {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  margin-left: 6px;
+  flex: 0 0 auto;
+}
+
+#exportchat-claude-root .ecc-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 32px;
+  padding: 0 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(8px);
+  color: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1;
+  cursor: pointer;
+  white-space: nowrap;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12);
+  transition: background 120ms ease, box-shadow 120ms ease, border-color 120ms ease;
+}
+
+#exportchat-claude-root .ecc-button:hover,
+#exportchat-claude-root .ecc-button[aria-expanded="true"] {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.25);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.16);
+}
+
+#exportchat-claude-root .ecc-button:focus-visible {
+  outline: 2px solid rgba(200, 150, 100, 0.9);
+  outline-offset: 2px;
+}
+
+#exportchat-claude-slot,
+.ecc-slot {
+  display: inline-flex;
+  align-items: center;
+}
+
+#exportchat-claude-root.ecc-fallback {
+  position: fixed;
+  top: 12px;
+  right: 16px;
+  z-index: 2147483647;
+}
+
+#exportchat-claude-root .ecc-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 2147483647;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: rgba(10, 10, 15, 0.40);
+  backdrop-filter: blur(6px);
+}
+
+#exportchat-claude-root .ecc-overlay[hidden] {
+  display: none !important;
+}
+
+#exportchat-claude-root .ecc-modal {
+  width: min(100%, 360px);
+  padding: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  border-radius: 18px;
+  background: rgb(30, 28, 26);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.50);
+}
+
+#exportchat-claude-root .ecc-modal-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+#exportchat-claude-root .ecc-modal-title {
+  margin: 0;
+  color: rgb(240, 234, 224);
+  font-size: 17px;
+  font-weight: 700;
+}
+
+#exportchat-claude-root .ecc-modal-subtitle {
+  margin: 4px 0 0;
+  color: rgb(160, 150, 140);
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+#exportchat-claude-root .ecc-close-button {
+  height: 30px;
+  padding: 0 12px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.06);
+  color: rgb(200, 190, 180);
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+#exportchat-claude-root .ecc-close-button:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+#exportchat-claude-root .ecc-modal-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+#exportchat-claude-root .ecc-action-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 42px;
+  padding: 0 14px;
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.05);
+  color: rgb(230, 220, 210);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 100ms ease;
+}
+
+#exportchat-claude-root .ecc-action-button:hover {
+  background: rgba(255, 255, 255, 0.10);
+}
+
+body.ecc-modal-open {
+  overflow: hidden;
+}

@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "ExportChat ChatGPT",
-  "description": "Adds a Save Chat button to ChatGPT and exports the current conversation as JSON, Markdown, and TXT.",
-  "version": "1.0.0",
+  "name": "ExportChat",
+  "description": "Adds a Save Chat button to ChatGPT and Claude and exports the current conversation as JSON, Markdown, and TXT.",
+  "version": "2.0.0",
   "icons": {
     "16": "icons/icon_16.png",
     "32": "icons/icon_32.png",
@@ -14,7 +14,8 @@
   ],
   "host_permissions": [
     "https://chatgpt.com/*",
-    "https://chat.openai.com/*"
+    "https://chat.openai.com/*",
+    "https://claude.ai/*"
   ],
   "content_scripts": [
     {
@@ -27,6 +28,18 @@
       ],
       "css": [
         "styles.css"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "https://claude.ai/*"
+      ],
+      "js": [
+        "content_claude.js"
+      ],
+      "css": [
+        "styles_claude.css"
       ],
       "run_at": "document_idle"
     }
