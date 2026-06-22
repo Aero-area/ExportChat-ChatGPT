@@ -401,34 +401,47 @@ function createRoot() {
   return root;
 }
 
-function findHeaderAnchor() {
-  return (
-    document.querySelector('button[data-testid="model-switcher-dropdown-button"]') ||
-    document.querySelector('header button[aria-haspopup="menu"]') ||
-    document.querySelector('header [id^="radix-"][aria-expanded]') ||
-    document.querySelector('header .group.touch\\:min-h-10') ||
-    document.querySelector('header .group.min-h-10') ||
-    document.querySelector('header .group.cursor-pointer') ||
-    document.querySelector('header .font-semibold') ||
-    document.querySelector('header .font-normal.text-lg')
-  );
-}
+function findHeaderActionsContainer() {
+  const primary = document.getElementById("conversation-header-actions");
 
-function findHeaderContainer() {
-  const anchor = findHeaderAnchor();
-
-  if (!anchor) {
-    return null;
+  if (isHeaderActionsContainer(primary)) {
+    return primary;
   }
 
-  return (
-    anchor.closest("div.flex.items-center.gap-2") ||
-    anchor.closest("div.flex.items-center") ||
-    anchor.closest("header")
+  const containerSelectors = [
+    'header [data-testid="conversation-header-actions"]',
+    'header [data-testid="chat-header-actions"]',
+    'header [data-testid="thread-header-actions"]'
+  ];
+
+  for (let index = 0; index < containerSelectors.length; index += 1) {
+    const container = document.querySelector(containerSelectors[index]);
+
+    if (isHeaderActionsContainer(container)) {
+      return container;
+    }
+  }
+
+  const actionButton = document.querySelector(
+    'header [data-testid="share-chat-button"], header [data-testid="share-button"]'
   );
+
+  if (actionButton && isHeaderActionsContainer(actionButton.parentElement)) {
+    return actionButton.parentElement;
+  }
+
+  return null;
 }
 
-  function ensureSlot(container, anchor) {
+function isHeaderActionsContainer(element) {
+  if (!element || element.id === ROOT_ID || element.id === SLOT_ID) {
+    return false;
+  }
+
+  return Boolean(element.closest("header"));
+}
+
+  function ensureSlot(container) {
     let slot = getExistingSlot();
 
     if (slot && slot.parentElement !== container) {
@@ -443,25 +456,22 @@ function findHeaderContainer() {
     }
 
     if (!slot.parentElement) {
-      if (anchor && anchor.nextSibling) {
-        container.insertBefore(slot, anchor.nextSibling);
-      } else {
-        container.appendChild(slot);
-      }
+      container.prepend(slot);
+    } else if (container.firstElementChild !== slot) {
+      container.prepend(slot);
     }
 
     return slot;
   }
 
   function mountNative() {
-    const anchor = findHeaderAnchor();
-    const container = findHeaderContainer();
+    const container = findHeaderActionsContainer();
 
-    if (!anchor || !container) {
+    if (!container) {
       return false;
     }
 
-    const slot = ensureSlot(container, anchor);
+    const slot = ensureSlot(container);
     let root = getExistingRoot();
 
     if (!root) {
